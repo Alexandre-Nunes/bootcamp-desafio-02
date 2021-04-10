@@ -15,7 +15,7 @@ steps:
     versionSpec: '12.x'
   displayName: 'Install Node.js'
 
-- script: npm install
+- script: npm ci
   displayName: 'npm install'
 
 - script: npm run 
@@ -24,4 +24,12 @@ steps:
   
 - script: npm run cy:run:chrome
   displayName: 'Run testes Chrome'
+  continueOnError: true
+
+- task: PublishTestResults@2
+  displayName: 'exibindo resultado dos testes'
+  inputs: 
+     testResultsFiles: '**/junit-*.xml'
+     mergeTestResults: true
+     testRunTitle: 'Bootcamp desafio 2'
   continueOnError: true
